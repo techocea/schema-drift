@@ -1,6 +1,7 @@
 package com.webizera.schemadrift.controller;
 
 import com.webizera.schemadrift.service.SchemaInspectorService;
+import com.webizera.schemadrift.service.SchemaLinterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import java.util.List;
 public class SchemaController {
 
     private final SchemaInspectorService inspectorService;
+    private final SchemaLinterService linterService;
 
     @GetMapping("/inspect")
     public ResponseEntity<List<SchemaInspectorService.TableMetaData>> inspectSchema() {
@@ -22,4 +24,12 @@ public class SchemaController {
         return ResponseEntity.ok(metaData);
     }
 
+    @GetMapping("/lint")
+    public ResponseEntity<List<SchemaLinterService.LintViolation>> lintSchema() {
+        List<SchemaInspectorService.TableMetaData> metadata = inspectorService.inspectDatabase();
+
+        List<SchemaLinterService.LintViolation> violations = linterService.lint(metadata);
+
+        return ResponseEntity.ok(violations);
+    }
 }
