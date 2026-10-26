@@ -1,0 +1,97 @@
+[
+  {
+    "columns": [
+      {
+        "columnName": "id",
+        "dataType": "uuid",
+        "nullable": false
+      },
+      {
+        "columnName": "name",
+        "dataType": "varchar",
+        "nullable": false
+      },
+      {
+        "columnName": "email",
+        "dataType": "varchar",
+        "nullable": false
+      },
+      {
+        "columnName": "address",
+        "dataType": "varchar",
+        "nullable": false
+      },
+      {
+        "columnName": "created_at",
+        "dataType": "timestamp",
+        "nullable": true
+      }
+    ],
+    "primaryKeys": [
+      "id"
+    ],
+    "tableName": "customers"
+  },
+  {
+    "columns": [
+      {
+        "columnName": "id",
+        "dataType": "serial",
+        "nullable": false
+      },
+      {
+        "columnName": "invoice_no",
+        "dataType": "varchar",
+        "nullable": false
+      },
+      {
+        "columnName": "description",
+        "dataType": "varchar",
+        "nullable": true
+      },
+      {
+        "columnName": "customer_id",
+        "dataType": "int4",
+        "nullable": true
+      }
+    ],
+    "primaryKeys": [],
+    "tableName": "payments"
+  },
+  {
+    "columns": [
+      {
+        "columnName": "id",
+        "dataType": "serial",
+        "nullable": false
+      }
+    ],
+    "primaryKeys": [
+      "id"
+    ],
+    "tableName": "rogue_table"
+  },
+  {
+    "columns": [
+      {
+        "columnName": "id",
+        "dataType": "serial",
+        "nullable": false
+      },
+      {
+        "columnName": "name",
+        "dataType": "varchar",
+        "nullable": false
+      },
+      {
+        "columnName": "created_at",
+        "dataType": "timestamp",
+        "nullable": true
+      }
+    ],
+    "primaryKeys": [
+      "id"
+    ],
+    "tableName": "tenants"
+  }
+]

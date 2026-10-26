@@ -34,10 +34,10 @@ public class SchemaInspectorService {
         Map<String, TableMetaData> tablesMap = new LinkedHashMap<>();
 
         try (Connection connection = dataSource.getConnection()){
-            DatabaseMetaData metaData = connection.getMetaData();
+            DatabaseMetaData metadata = connection.getMetaData();
 
             // Get Tables
-            try (ResultSet rs = metaData.getTables(null, "public", "%", new String[]{"TABLE"})) {
+            try (ResultSet rs = metadata.getTables(null, "public", "%", new String[]{"TABLE"})) {
                 while(rs.next()){
                     String tableName = rs.getString("TABLE_NAME");
                     TableMetaData table = new TableMetaData();
@@ -50,7 +50,7 @@ public class SchemaInspectorService {
             for (String tableName : tablesMap.keySet()) {
                 TableMetaData table = tablesMap.get(tableName);
 
-                try(ResultSet rs = metaData.getColumns(null,"public", tableName,"%")){
+                try(ResultSet rs = metadata.getColumns(null,"public", tableName,"%")){
                     while(rs.next()){
                         ColumnMetaData column = new ColumnMetaData();
                         column.setColumnName(rs.getString("COLUMN_NAME"));
@@ -60,7 +60,7 @@ public class SchemaInspectorService {
                     }
                 }
 
-                try(ResultSet rs = metaData.getPrimaryKeys(null,"public", tableName)){
+                try(ResultSet rs = metadata.getPrimaryKeys(null,"public", tableName)){
                     while(rs.next()){
                         table.getPrimaryKeys().add(rs.getString("COLUMN_NAME"));
                     }
